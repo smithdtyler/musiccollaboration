@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+
+    <session-factory>
+
+        <!-- Database connection settings -->
+        <!-- SQL Server Connection -->
+        <!-- 
+        <property name="connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
+        <property name="connection.url">jdbc:sqlserver://localhost;</property>
+        <property name="connection.username">hibernate</property>
+        <property name="connection.password">hibernate</property>
+        <property name="connection.databaseName">music</property>
+        <property name="dialect">org.hibernate.dialect.SQLServer2008Dialect</property>
+         -->
+
+        <!--  HSQLDB Connection -->  
+        <property name="connection.driver_class">org.hsqldb.jdbcDriver</property>
+        <property name="connection.url">jdbc:hsqldb:file:/test/music</property>
+        <property name="connection.username">SA</property>
+        <property name="connection.password"></property>
+        <property name="dialect">org.hibernate.dialect.HSQLDialect</property>
+        
+        <!-- JDBC connection pool (use the built-in) -->
+        <property name="connection.pool_size">1</property>
+
+        <!-- Disable the second-level cache  -->
+        <property name="cache.provider_class">org.hibernate.cache.internal.NoCacheProvider</property>
+
+        <!-- Echo all executed SQL to stdout -->
+        <property name="show_sql">true</property>
+        
+        <!-- Nicely format executed SQL -->
+        <property name="format_sql">false</property>
+
+        <!-- Drop and re-create the database schema on startup -->
+        <!-- <property name="hbm2ddl.auto">create</property>-->
+
+        <mapping resource="com/smithdtyler/music/domain/Note.hbm.xml"/>
+        <mapping resource="com/smithdtyler/music/domain/Song.hbm.xml"/>
+        <mapping resource="com/smithdtyler/music/domain/TimeSignature.hbm.xml"/>
+        <mapping resource="com/smithdtyler/music/domain/User.hbm.xml"/>
+        <mapping resource="com/smithdtyler/music/domain/User_Song.hbm.xml"/>
+
+    </session-factory>
+
+</hibernate-configuration>

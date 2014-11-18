@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.smithdtyler.music.domain">
+  
+  <class name="User" table="MusicUser">
+    <id name="id" column="MusicUser_Id">
+      <generator class="increment"/>
+    </id>
+    <property name="username" column="MusicUser_Username"/>
+    <property name="email" column="MusicUser_Email"/>
+    <property name="passwordHash" column="MusicUser_PasswordHash"/>
+    <property name="isAdmin" column="MusicUser_IsAdmin"/>
+    <set name="user_Songs" lazy="true" inverse="true">
+      <key column="MusicUser_Id" not-null="true"/>
+      <one-to-many class="User_Song"/>
+    </set>
+  </class>
+
+</hibernate-mapping>

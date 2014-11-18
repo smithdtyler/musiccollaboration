@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.smithdtyler.music.domain">
+  
+  <class name="User_Song" table="MusicUser_Song">
+    <id name="id" column="MusicUser_Song_Id">
+      <generator class="increment"/>
+    </id>
+    <property name="type" column="MusicUser_Song_Type">
+      <type name="org.hibernate.type.EnumType">
+        <param name="enumClass">com.smithdtyler.music.domain.User_Song_Type</param>
+      </type>
+    </property>
+    <many-to-one name="user" class="User" column="MusicUser_Id" lazy="false" not-null="true"/>
+    <many-to-one name="song" class="Song" column="Song_Id" lazy="false" not-null="true"/>    
+  </class>
+
+</hibernate-mapping>

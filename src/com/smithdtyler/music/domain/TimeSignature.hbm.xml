@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.smithdtyler.music.domain">
+  
+  <class name="TimeSignature" table="TimeSignature">
+    <id name="id" column="TimeSignature_Id">
+      <generator class="increment"/>
+    </id>
+    <property name="numerator" column="TimeSignature_Numerator"/>
+    <property name="denominator" column="TimeSignature_Denominator"/>
+    <set name="songs" lazy="true" inverse="true">
+      <key column="TimeSignature" not-null="true"/>
+      <one-to-many class="Song"/>
+    </set>
+  </class>
+
+</hibernate-mapping>

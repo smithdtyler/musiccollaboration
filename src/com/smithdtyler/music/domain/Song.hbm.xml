@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.smithdtyler.music.domain">
+  
+  <class name="Song" table="Song">
+    <id name="id" column="Song_Id">
+      <generator class="increment"/>
+    </id>
+    <property name="name" column="Song_Name"/>
+    <property name="tempo" column="Song_Tempo"/>
+    <!--  Simple String mapping of key -->
+    <!-- <property name="key" column="Song_Key" type="string"/>  -->
+    <!--  Enumeration Maping of Key -->
+    <property name="key" column="Song_Key">
+      <type name="org.hibernate.type.EnumType">
+        <param name="enumClass">com.smithdtyler.music.domain.Key</param>
+      </type>
+    </property>
+    <many-to-one name="timeSignature" class="TimeSignature" column="TimeSignature" lazy="false" not-null="true" cascade="save-update"/>
+    <!--  Notes are ordered so use a list -->
+    <set name="notes" lazy="true" inverse="true" cascade="save-update, delete" sort="natural">
+      <key column="Song" not-null="true"/>
+      <one-to-many class="Note"/>
+    </set>
+    <set name="user_Songs" lazy="true" inverse="true" cascade="delete">
+      <key column="Song_Id" not-null="true"/>
+      <one-to-many class="User_Song"/>
+    </set>
+  </class>
+
+</hibernate-mapping>
